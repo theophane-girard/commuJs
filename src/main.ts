@@ -17,6 +17,7 @@ export const routes: Routes = [
     data: {
       imgUrl: 'https://zupimages.net/up/23/06/evxr.png',
     },
+    title: `La détection des changements d'un formulaire`
   },
   {
     path: 'map-operator',
@@ -24,6 +25,7 @@ export const routes: Routes = [
     data: {
       imgUrl: 'https://zupimages.net/up/23/07/42sy.png',
     },
+    title: 'Différence entre SwitchMap, mergeMap et exhaustMap'
   },
   {
     path: 'share-replay',
@@ -31,6 +33,7 @@ export const routes: Routes = [
     data: {
       imgUrl: 'https://zupimages.net/up/23/07/u9z4.png',
     },
+    title: `L'opérateur ShareReplay()`
   },
   {
     path: 'unsubscribe',
@@ -38,6 +41,7 @@ export const routes: Routes = [
     data: {
       imgUrl: 'https://zupimages.net/up/23/07/jm5o.png',
     },
+    title: `Les opérateurs qui se "auto-complete"`
   },
   {
     path: 'type-utils',
@@ -45,6 +49,7 @@ export const routes: Routes = [
     data: {
       imgUrl: 'https://zupimages.net/up/23/07/e1ze.png',
     },
+    title: 'Les type-utils'
   },
   // {
   //   path: 'change-detection',
@@ -52,6 +57,7 @@ export const routes: Routes = [
   //   data: {
   //     imgUrl: '',
   //   },
+  //   title: 'change-detection'
   // },
 ];
 bootstrapApplication(AppComponent, {

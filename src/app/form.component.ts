@@ -12,7 +12,6 @@ import { tap, map } from 'rxjs';
   selector: 'my-form',
   template: `
     <ng-container *ngIf="updateMailStatus$ | async"></ng-container>
-    <h2>form change</h2>
     <form [formGroup]="form">
       has an email ?
       <input formControlName="hasEmail" type="checkbox"/>

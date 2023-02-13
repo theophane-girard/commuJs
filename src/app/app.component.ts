@@ -7,7 +7,7 @@ import {
   Router,
   RouterModule,
 } from '@angular/router';
-import { filter, map, Observable, tap } from 'rxjs';
+import { filter, map, Observable, shareReplay, tap } from 'rxjs';
 import { routes } from '../main';
 import { FormComponent } from './form.component';
 import { HelloComponent } from './hello.component';
@@ -16,7 +16,7 @@ import { MapOperatorComponent } from './map-operator.component';
 @Component({
   selector: 'my-app',
   template: `
-    <hello name="{{ name }}"></hello>
+    <hello name="{{ title$ | async }}"></hello>
     <div style="display: flex; justify-content: space-evenly">
       <nav>
         <ul>
@@ -41,14 +41,19 @@ import { MapOperatorComponent } from './map-operator.component';
   ],
 })
 export class AppComponent {
-  name = 'Angular ' + VERSION.major;
+  title$
   routes = routes;
   currentExercise$: Observable<string>;
+  routeChange$ = this.router.events.pipe(
+    filter((event) => event instanceof ActivationEnd),
+    shareReplay()
+  )
   constructor(private router: Router) {
-    this.currentExercise$ = router.events.pipe(
-      filter((event) => event instanceof ActivationEnd),
-      tap((data) => console.log(data)),
+    this.currentExercise$ = this.routeChange$.pipe(
       map((data: ActivationEnd) => (data.snapshot.data as any).imgUrl)
+    );
+    this.title$ = this.routeChange$.pipe(
+      map((data: ActivationEnd) => data.snapshot.title)
     );
   }
 }

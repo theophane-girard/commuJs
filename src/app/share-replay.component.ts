@@ -5,7 +5,6 @@ import { count, of, map, tap, shareReplay } from 'rxjs';
 @Component({
   selector: 'share-replay',
   template: `
-    <h2>Operator ShareReplay</h2>
     <h5>Trace : </h5>
     <ul>
       <li *ngFor="let obsCount of userCallList">{{obsCount}}</li>

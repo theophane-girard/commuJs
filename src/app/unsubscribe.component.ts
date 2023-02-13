@@ -17,7 +17,6 @@ import {
 @Component({
   selector: 'share-replay',
   template: `
-    <h2>Operator ShareReplay</h2>
     <button (click)="subscribe()">Subscribe</button>
     <button (click)="unsub()">ngDestroy</button>
     <ul>

@@ -26,7 +26,6 @@ import {
   selector: 'map-operator',
   standalone: true,
   template: `
-  <h2> différence entre SwitchMap,  mergeMap et exhaustMap</h2>
   <form [formGroup]="form">
     <input formControlName="textField"/>
   </form>
