@@ -13,10 +13,6 @@ import { tap, map } from 'rxjs';
   template: `
     <ng-container *ngIf="updateMailStatus$ | async"></ng-container>
     <h2>form change</h2>
-    <div>
-      <img src="https://zupimages.net/up/23/06/evxr.png" alt="" />
-    </div>
-    
     <form [formGroup]="form">
       has an email ?
       <input formControlName="hasEmail" type="checkbox"/>
