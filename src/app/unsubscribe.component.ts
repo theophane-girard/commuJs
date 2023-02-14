@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import {
-  count,
-  of,
-  map,
   tap,
   shareReplay,
   interval,
@@ -13,31 +10,40 @@ import {
   take,
   first,
 } from 'rxjs';
-
+// <ul>
+// <li *ngFor="let completedObs of completedObservables">{{completedObs}}</li>
+// </ul>
 @Component({
   selector: 'share-replay',
   template: `
     <button (click)="subscribe()">Subscribe</button>
     <button (click)="unsub()">ngDestroy</button>
-    <ul>
-      <li *ngFor="let completedObs of completedObservables">{{completedObs}}</li>
-    </ul>
+
     <div style="display: flex; justify-content: space-around">
       <div>
         <ul>
-          <li><strong>takeUntil()</strong></li>
+          <li>
+            <strong>takeUntil()</strong>
+            <span *ngIf="isTakeUntilComplete"> 🏁</span>
+          </li>
           <li *ngFor="let val of takeUntilValues">{{val}}</li>
         </ul>
       </div>
       <div>
         <ul>
-          <li><strong>take(4)</strong></li>
+          <li>
+            <strong>take(4)</strong>
+            <span *ngIf="isTakeComplete"> 🏁</span>
+          </li>
           <li *ngFor="let val of takeValues">{{val}}</li>
         </ul>
       </div>
       <div>
         <ul>
-          <li><strong>first()</strong></li>
+          <li>
+            <strong>first()</strong>
+            <span *ngIf="isFirstComplete"> 🏁</span>
+          </li>
           <li *ngFor="let val of firstValues">{{val}}</li>
         </ul>
       </div>
@@ -50,7 +56,9 @@ export class UnsubscribeComponent {
   takeUntilValues = [];
   takeValues = [];
   firstValues = [];
-  completedObservables = [];
+  isTakeUntilComplete = false;
+  isTakeComplete = false;
+  isFirstComplete = false;
 
   subject$ = new Subject<number>();
   destroy$ = new Subject<void>();
@@ -66,26 +74,25 @@ export class UnsubscribeComponent {
         takeUntil(this.destroy$)
       )
       .subscribe({
-        complete: () =>
-          this.completedObservables.push(`Observable completed : takeUntil()`),
+        complete: () => (this.isTakeUntilComplete = true),
       });
+
     this.timer$
       .pipe(
         tap((timer) => this.takeValues.push(`timer : ${timer}`)),
         take(4)
       )
       .subscribe({
-        complete: () =>
-          this.completedObservables.push(`Observable completed : take(4)`),
+        complete: () => (this.isTakeComplete = true),
       });
+
     this.timer$
       .pipe(
         tap((timer) => this.firstValues.push(`timer : ${timer}`)),
         first()
       )
       .subscribe({
-        complete: () =>
-          this.completedObservables.push(`Observable completed : first()`),
+        complete: () => (this.isFirstComplete = true),
       });
   }
 

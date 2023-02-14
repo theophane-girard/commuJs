@@ -16,7 +16,7 @@ import { MapOperatorComponent } from './map-operator.component';
 @Component({
   selector: 'my-app',
   template: `
-    <hello name="{{ title$ | async }}"></hello>
+    <hello name="{{ title$ | async }}"/>
     <div style="display: flex; justify-content: space-evenly">
       <nav>
         <ul>
@@ -29,7 +29,7 @@ import { MapOperatorComponent } from './map-operator.component';
         <img [src]="currentExercise$ | async" alt="" />
       </div>
     </div>
-    <router-outlet></router-outlet>
+    <router-outlet />
   `,
   standalone: true,
   imports: [

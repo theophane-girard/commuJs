@@ -7,11 +7,12 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { tap, map } from 'rxjs';
+import { timeoutProvider } from 'rxjs/internal/scheduler/timeoutProvider';
 
 @Component({
   selector: 'my-form',
   template: `
-    <ng-container *ngIf="updateMailStatus$ | async"></ng-container>
+    <ng-container *ngIf="updateMailStatus$ | async"/>
     <form [formGroup]="form">
       has an email ?
       <input formControlName="hasEmail" type="checkbox"/>
@@ -37,8 +38,8 @@ export class FormComponent {
   }
 
   form: FormGroup = new FormGroup({
-    email: new FormControl({ value: '', disabled: true }),
-    hasEmail: new FormControl(false),
+    email: new FormControl({ value: '', disabled: false }),
+    hasEmail: new FormControl(true),
   });
 
   updateMailStatus$ = this.form.controls.hasEmail.valueChanges.pipe(

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { count, of, map, tap, shareReplay } from 'rxjs';
+import { of, map, tap, shareReplay, distinctUntilChanged, take } from 'rxjs';
 
 @Component({
   selector: 'share-replay',
@@ -25,6 +25,9 @@ export class ShareReplayComponent {
   userCallList = [];
   users$ = this.getUsers().pipe(
     tap(() => this.userCallList.push(`J'appelle la fonction getUsers()`))
+    // distinctUntilChanged(),
+    // take(1),
+    // shareReplay(),
   );
 
   kids$ = this.users$.pipe(map((users) => users.filter((u) => u.age < 18)));
