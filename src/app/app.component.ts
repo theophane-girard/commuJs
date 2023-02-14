@@ -9,9 +9,9 @@ import {
 } from '@angular/router';
 import { filter, map, Observable, shareReplay, tap } from 'rxjs';
 import { routes } from '../main';
-import { FormComponent } from './form.component';
-import { HelloComponent } from './hello.component';
-import { MapOperatorComponent } from './map-operator.component';
+import { FormComponent } from './containers/form.component';
+import { HelloComponent } from './ui/hello.component';
+import { MapOperatorComponent } from './containers/map-operator.component';
 
 @Component({
   selector: 'my-app',
@@ -41,13 +41,13 @@ import { MapOperatorComponent } from './map-operator.component';
   ],
 })
 export class AppComponent {
-  title$
+  title$;
   routes = routes;
   currentExercise$: Observable<string>;
   routeChange$ = this.router.events.pipe(
     filter((event) => event instanceof ActivationEnd),
     shareReplay()
-  )
+  );
   constructor(private router: Router) {
     this.currentExercise$ = this.routeChange$.pipe(
       map((data: ActivationEnd) => (data.snapshot.data as any).imgUrl)
